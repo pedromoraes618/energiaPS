@@ -6,6 +6,7 @@ import login_cliente as lgc
 import login_concessionaria as lcs
 import login_parceiro as lprc
 
+
 def valida_numero():
     while True:
         pesq = input('Escolha uma opção: »»»  ')
@@ -15,16 +16,6 @@ def valida_numero():
         else:
             print('Erro, Insira um valor númérico!')
     return pesquisar
-
-# def valida_numero(pesq):
-#     while True:
-#         pesq = input('Escolha uma opção: »»»  ')
-#         if pesq.isnumeric():
-#             pesquisar = (int(pesq))
-#             break
-#         else:
-#             print('Erro, Insira um valor númérico!')
-#     return pesquisar
 
 
 while True:
@@ -57,17 +48,16 @@ Menu Principal:
 Escolha uma opção: »»»  ''')
             if menu_concecionaria == '1':
                 lcs.login_concessionaria()
-            
+
             elif menu_concecionaria == '2':
                 os.system('cls')
                 break
-            
 
     elif menu_principal == 2:
         while True:
             os.system('cls')
             msg.top()
-        
+
             menu_parceiro = input('''
 [#] Area - Login/Cliente:
 ------------------------
@@ -76,17 +66,16 @@ Escolha uma opção: »»»  ''')
 Escolha uma opção: »»»  ''')
             if menu_parceiro == '1':
                 lgc.login_cliente()
-            
+
             elif menu_parceiro == '2':
                 os.system('cls')
                 break
-            
-          
+
     elif menu_principal == 3:
-         while True:
+        while True:
             os.system('cls')
             msg.top()
-        
+
             menu_parceiro = input('''
 [#] Area - Login/Parceiro:
 ------------------------
@@ -95,14 +84,14 @@ Escolha uma opção: »»»  ''')
 Escolha uma opção: »»»  ''')
             if menu_parceiro == '1':
                 lprc.login_parceiro()
-            
+
             elif menu_parceiro == '2':
                 os.system('cls')
                 break
-     
+
     elif menu_principal == 4:
-            print('Informação sobre o projeto - em contrução')
-            msg.sobre()
+        print('Informação sobre o projeto - em contrução')
+        msg.sobre()
     elif menu_principal == 5:
         os.system('cls')
         print('saindo...')

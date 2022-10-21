@@ -6,7 +6,7 @@ def cabecalho():
     separador = '='*len(concessionaria)
     topo = separador + '\n' + concessionaria + '\n' + separador
     print(topo)
-    #data_extenso()
+    # data_extenso()
 
 
 cabecalho()
@@ -14,11 +14,9 @@ cabecalho()
 
 def registro():
     print('REGISTRO DE DADOS ')
-    cont = -1
 
-    contrato = int(input('Digite a Conta Contrado: '))
+    contrato = str(input('Digite a Conta Contrado: '))
     for dado in cad.gerador:
-        cont = cont+1
         if dado['contrato'] == contrato:
             print('.'*40)
             print(dado)
@@ -38,4 +36,3 @@ def registro():
           dado['nome'], 'Crédito: E$', dado['credito'])
     print('-'*80)
     input('Pressione qualquer tecla para continuar...')
-    cont = -1
