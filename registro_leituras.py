@@ -16,7 +16,7 @@ def registro():
     print('REGISTRO DE DADOS ')
     cont = -1
 
-    contrato = int(input('Digite a Conta Contrado: '))
+    contrato = str(input('Digite a Conta Contrado: '))
     for dado in cad.gerador:
         cont = cont+1
         if dado['contrato'] == contrato:
