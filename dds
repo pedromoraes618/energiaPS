@@ -1,0 +1,149 @@
+[33mcommit 19561500ac1b1b36931345ed81ed5cc34c27d385[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: pedromoraes618 <pdmr123@hotmail.com>
+Date:   Fri Oct 21 12:30:03 2022 -0300
+
+    versao atualizada,incluido os login
+
+[1mdiff --git a/__pycache__/cadastros.cpython-39.pyc b/__pycache__/cadastros.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a365946[m
+Binary files /dev/null and b/__pycache__/cadastros.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/funcao.cpython-39.pyc b/__pycache__/funcao.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8373905[m
+Binary files /dev/null and b/__pycache__/funcao.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/grafico.cpython-39.pyc b/__pycache__/grafico.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d67e330[m
+Binary files /dev/null and b/__pycache__/grafico.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/login_cliente.cpython-39.pyc b/__pycache__/login_cliente.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e90ff8a[m
+Binary files /dev/null and b/__pycache__/login_cliente.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/login_concessionaria.cpython-39.pyc b/__pycache__/login_concessionaria.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5b295f3[m
+Binary files /dev/null and b/__pycache__/login_concessionaria.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/login_parceiro.cpython-39.pyc b/__pycache__/login_parceiro.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2a1c15d[m
+Binary files /dev/null and b/__pycache__/login_parceiro.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/mensagem.cpython-39.pyc b/__pycache__/mensagem.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4d8c0bd[m
+Binary files /dev/null and b/__pycache__/mensagem.cpython-39.pyc differ
+[1mdiff --git a/__pycache__/registro_leituras.cpython-39.pyc b/__pycache__/registro_leituras.cpython-39.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e93b677[m
+Binary files /dev/null and b/__pycache__/registro_leituras.cpython-39.pyc differ
+[1mdiff --git a/cadastros.py b/cadastros.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f7f3cea[m
+[1m--- /dev/null[m
+[1m+++ b/cadastros.py[m
+[36m@@ -0,0 +1,192 @@[m
+[32m+[m[32m'''Contrato – unidade consumidora[m
+[32m+[m[32mNome – pessoa dona da conta contrato[m
+[32m+[m[32mConsumido – o consumo de energia realizado pela casa[m
+[32m+[m[32mInjetado – a anergia gerada pelas placas solares[m
+[32m+[m[32mSaldo_energetico[m
+[32m+[m[32mConsersor - (%) do saldo_energetico[m
+[32m+[m[32mCredito - conversor do saldo_energetico'''[m
+[32m+[m[32mimport os[m
+[32m+[m[32mimport mensagem as msg[m
+[32m+[m[32mimport grafico[m
+[32m+[m[32mimport funcao as fun[m
+[32m+[m[32mfrom random import randint, random[m
+[32m+[m
+[32m+[m[32mdef valida_num(pesq):[m
+[32m+[m[32m    while True:[m
+[32m+[m[32m        pesq = input('Digite a Matrícula do Aluno:')[m
+[32m+[m[32m        if pesq.isnumeric():[m
+[32m+[m[32m            pesquisar = (int(pesq))[m
+[32m+[m[32m            break[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            msg.erro_numerico()[m
+[32m+[m[32m    return pesquisar[m
+[32m+[m
+[32m+[m
+[32m+[m[32mcotacao =[9][m
+[32m+[m
+[32m+[m[32mgerador = [{'contrato': '123', 'nome': 'Cristiano Ronaldo', 'consumido': 400, 'injetado': 500, 'saldo_energetico': 100, 'conversor': cotacao[0], 'credito': 40,'token':'0'},[m
+[32m+[m[32m           {'contrato': '122', 'nome': 'Messi', 'consumido': 400, 'injetado': 500,'saldo_energetico': 100,'conversor': cotacao[0], 'credito': 60,'token':'0'},[m
+[32m+[m[32m           {'contrato': '121', 'nome': 'Ronaldinho Gaucho', 'consumido': 600,'conversor': cotacao[0], 'injetado': 900, 'saldo_energetico': 300, 'credito': 270,'token':'0'}][m
+[32m+[m
+[32m+[m
+[32m+[m[32mparceiro = [{'contrato': '1', 'nome': 'Supermercado', 'tipo': 'comercio', 'credito': 0,'user':'adm2','token':'145'}, {[m
+[32m+[m[32m    'contrato': 2, 'nome': 'Farmácia', 'tipo': 'comercio', 'credito': '0','user':'adm3','token':'155'}][m
+[32m+[m
+[32m+[m[32mconcecionaria = [{'user': 'adm', 'token': '165'},{'user': 'adm1', 'token': '0'}][m
+[32m+[m
+[32m+[m
+[32m+[m[32m# def parceria():[m
+[32m+[m[32m#     while True:[m
+[32m+[m[32m#         tipo_parceiro = input([m
+[32m+[m[32m#             '[1] - Comercio / [2] - Instituição de Caridade: ')[m
+[32m+[m[32m#         if tipo_parceiro == '1':[m
+[32m+[m[32m#             tipo_parceiro = 'comercio'[m
+[32m+[m[32m#             break[m
+[32m+[m[32m#         elif tipo_parceiro == '2':[m
+[32m+[m[32m#             tipo_parceiro = 'caridade'[m
+[32m+[m[32m#             break[m
+[32m+[m[32m#         elif tipo_parceiro:[m
+[32m+[m[32m#             print('Verifique as opções!!!')[m
+[32m+[m
+[32m+[m[32mdef cadastro_parceiro():[m
+[32m+[m[32m    print('\nCADASTRO DE PARCEIROS:\n')[m
+[32m+[m[32m    contrato = len(parceiro)+1[m
+[32m+[m[32m    nome = str(input('Digite o Nome da Empresa:'))[m
+[32m+[m[32m    while True:[m
+[32m+[m[32m        tipo_parceiro = input([m
+[32m+[m[32m            ' [c] Comercio / [i] - Instituição de Caridade: ').lower()[0][m
+[32m+[m[32m        if tipo_parceiro == 'c':[m
+[32m+[m[32m            tipo_parceiro = 'comercio'[m
+[32m+[m[32m            break[m
+[32m+[m[32m        elif tipo_parceiro == 'i':[m
+[32m+[m[32m            tipo_parceiro = 'caridade'[m
+[32m+[m[32m            break[m
+[32m+[m[32m        elif tipo_parceiro:[m
+[32m+[m[32m            print('Verifique as opções!!!')[m
+[32m+[m[32m    credito = 0[m
+[32m+[m[32m    dados_comercio = {'contrato': contrato, 'nome': nome,[m
+[32m+[m[32m                      'tipo': tipo_parceiro, 'credito': credito}[m
+[32m+[m[32m    parceiro.append(dados_comercio)[m
+[32m+[m[32m    relatorio_parceiro()[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef cadastro_geradores():[m
+[32m+[m[32m    while True:[m
+[32m+[m[32m        contrato = fun.validaNumeroContrato()  ##validar numero contrato para aceitar apenas numero[m
+[32m+[m[32m        nome = str(input('Digite o nome do cliente:'))[m
+[32m+[m[32m        token = randint(1,10000000) ##gerar token[m
+[32m+[m[32m        token = (str(token))[m
+[32m+[m[32m        while True:[m
+[32m+[m[32m                alert = input("Deseja cadastrar esse cliente? tecle s ou n: ")[m
+[32m+[m[32m                if alert =="s":[m
+[32m+[m[32m                    print("Token gerado para cliente: ",token,"o token será enviado para o cliente via email")[m
+[32m+[m[32m                    consumido = 0  # int(input('Valor consumido(KWh):'))[m
+[32m+[m[32m                    injetado = 0  # int(input('Valor injetado(KWh):'))[m
+[32m+[m[32m                    saldo_energetico = 0[m
+[32m+[m[32m                    conversor = 0.9[m
+[32m+[m[32m                    credito = 0[m
+[32m+[m[32m                    dados_gerador = {'contrato': contrato, 'nome': nome, 'consumido': consumido, 'injetado': injetado,[m
+[32m+[m[32m                                    'saldo_energetico': saldo_energetico, 'conversor': conversor, 'credito': credito,'token':token}[m
+[32m+[m[32m                    gerador.append(dados_gerador)[m
+[32m+[m[32m                    print('='*40)[m
+[32m+[m[32m                    input('Cadastro realizado com sucesso! Pressione qualquer tecla para continuar...')[m
+[32m+[m[32m                    print('='*40)[m
+[32m+[m[32m                    break[m
+[32m+[m[32m                elif alert =="n":[m
+[32m+[m[32m                    input('Operação cancelada! Pressione qualquer tecla para continuar...')[m
+[32m+[m[32m                    break[m
+[32m+[m[32m                else:[m
+[32m+[m[32m                    input('Erro, Pressione qualquer tecla para continuar... ')[m
+[32m+[m[32m                    break[m[41m       [m
+[32m+[m[41m              [m
+[32m+[m[32m        break[m
+[32m+[m
+[32m+[m[32mdef consultar_geradores():[m
+[32m+[m[32m 
