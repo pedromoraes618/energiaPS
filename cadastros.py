@@ -4,10 +4,10 @@ Consumido – o consumo de energia realizado pela casa
 Injetado – a anergia gerada pelas placas solares
 Saldo_energetico
 Consersor - (%) do saldo_energetico
-Credito - conversor do saldo_energetico'''
+Credito - cotacao do saldo_energetico'''
 import os
 import mensagem as msg
-import grafico
+import grafico as gf
 import funcao as fun
 from random import randint, random
 
@@ -23,33 +23,35 @@ def valida_num(pesq):
     return pesquisar
 
 
-cotacao = [9]
+def editar_cotacao():
+    cotacao = vCotacao[0]
+    print('='*40)
+    print("Valor atual da cotação ", gerador[0]['cotacao'])
+    cotacao = float(input('Digite o novo valor da cotação: '))
+    print('='*40)
+    print("Ajuste realizado, novo valor de cotação ", cotacao)
+    input("Valor atualizado!Pressione qualquer tecla para continuar...")
+    # atualizando lista geradores
+    for dado in gerador:
+        dado['cotacao'] = cotacao
+        dado['credito'] = dado['saldo_energetico'] * cotacao
+        # break
 
-gerador = [{'contrato': '123', 'nome': 'Cristiano Ronaldo', 'consumido': 400, 'injetado': 500, 'saldo_energetico': 100, 'conversor': 0.9, 'credito': 40, 'token': '0'},
-           {'contrato': '122', 'nome': 'Messi', 'consumido': 400, 'injetado': 500,
-               'saldo_energetico': 100, 'conversor': 0.9, 'credito': 60, 'token': '0'},
-           {'contrato': '121', 'nome': 'Ronaldinho Gaucho', 'consumido': 600, 'conversor': 0.9, 'injetado': 900, 'saldo_energetico': 300, 'credito': 270, 'token': '0'}]
+
+vCotacao = [0.9]  # editar_cotacao()
+
+gerador = [{'contrato': 100, 'nome': 'CRISTIANO RONALDO', 'consumido': 400, 'injetado': 600, 'saldo_energetico': 200, 'cotacao': 0.9, 'credito': 180, 'token': '0'},
+           {'contrato': 101, 'nome': 'MESSI', 'consumido': 400, 'injetado': 500,
+               'saldo_energetico': 100, 'cotacao': 0.9, 'credito': 90, 'token': '0'},
+           {'contrato': 102, 'nome': 'RONALDINHO GAUCHO', 'consumido': 600, 'cotacao': 0.9, 'injetado': 900, 'saldo_energetico': 300, 'credito': 270, 'token': '0'}]
 
 
-parceiro = [{'contrato': '1', 'nome': 'Supermercado', 'tipo': 'comercio', 'credito': 0, 'user': 'adm2', 'token': '145'}, {
-    'contrato': 2, 'nome': 'Farmácia', 'tipo': 'comercio', 'credito': '0', 'user': 'adm3', 'token': '155'}]
+parceiro = [{'contrato': 1, 'nome': 'Supermercado', 'tipo': 'comercio', 'credito': 0.0, 'user': 'adm2', 'token': '145'}, {
+    'contrato': 2, 'nome': 'Farmácia', 'tipo': 'comercio', 'credito': 0.0, 'user': 'adm3', 'token': '155'}]
 
 concecionaria = [{'user': 'adm', 'token': '165'},
                  {'user': 'adm1', 'token': '0'}]
 
-
-# def parceria():
-#     while True:
-#         tipo_parceiro = input(
-#             '[1] - Comercio / [2] - Instituição de Caridade: ')
-#         if tipo_parceiro == '1':
-#             tipo_parceiro = 'comercio'
-#             break
-#         elif tipo_parceiro == '2':
-#             tipo_parceiro = 'caridade'
-#             break
-#         elif tipo_parceiro:
-#             print('Verifique as opções!!!')
 
 def cadastro_parceiro():
     print('\nCADASTRO DE PARCEIROS:\n')
@@ -74,43 +76,50 @@ def cadastro_parceiro():
 
 
 def cadastro_geradores():
+    # while True:
+    os.system('cls')
+    msg.top()
+    print('\n\033[1mCADASTRO DE CLIENTES/GERADORES\033[m')
+    # validar numero contrato para aceitar apenas numero
+    #contrato = fun.validaNumeroContrato()
+    contrato = len(gerador)+100
+    nome = str(input('\nDigite o nome do cliente: ')).upper()
+    token = randint(1, 10000000)  # gerar token
+    token = (str(token))
     while True:
-        # validar numero contrato para aceitar apenas numero
-        contrato = fun.validaNumeroContrato()
-        nome = str(input('Digite o nome do cliente:'))
-        token = randint(1, 10000000)  # gerar token
-        token = (str(token))
-        while True:
-            alert = input("Deseja cadastrar esse cliente? tecle s ou n: ")
-            if alert == "s":
-                print("Token gerado para cliente: ", token,
-                      "o token será enviado para o cliente via email")
-                consumido = 0  # int(input('Valor consumido(KWh):'))
-                injetado = 0  # int(input('Valor injetado(KWh):'))
-                saldo_energetico = 0
-                conversor = 0.9
-                credito = 0
-                dados_gerador = {'contrato': contrato, 'nome': nome, 'consumido': consumido, 'injetado': injetado,
-                                 'saldo_energetico': saldo_energetico, 'conversor': conversor, 'credito': credito, 'token': token}
-                gerador.append(dados_gerador)
-                print('='*40)
-                input(
-                    'Cadastro realizado com sucesso! Pressione qualquer tecla para continuar...')
-                print('='*40)
-                break
-            elif alert == "n":
-                input('Operação cancelada! Pressione qualquer tecla para continuar...')
-                break
-            else:
-                input('Erro, Pressione qualquer tecla para continuar... ')
-                break
+        alert = input("Deseja cadastrar esse cliente? (s/n): ")[0]
+        if alert in 'sS':  # alert == "s" or alert == 'S':
+            print("Token gerado para cliente: ", token,
+                  "o token será enviado para o cliente via email")
+            consumido = 0  # int(input('Valor consumido(KWh):'))
+            injetado = 0  # int(input('Valor injetado(KWh):'))
+            saldo_energetico = 0
+            cotacao = [0]  # teste (arranjo tecnico)
+            credito = 0.0
+            dados_gerador = {'contrato': contrato, 'nome': nome, 'consumido': consumido, 'injetado': injetado,
+                             'saldo_energetico': saldo_energetico, 'cotacao': cotacao, 'credito': credito, 'token': token}
+            gerador.append(dados_gerador)
+            print('='*40)
+            input(
+                'Cadastro realizado com sucesso! Pressione qualquer tecla para continuar...')
+            print('='*40)
+            break
+        elif alert in 'nN':  # alert == "n" or alert == 'N':
+            input('Operação cancelada! Pressione qualquer tecla para continuar...')
+            break
+        else:
+            input(
+                ' Tecle S para salvar ou N para cancelar a operação. \n Pressione qualquer tecla para continuar... ')
+            # break
 
-        break
+        # break
 
 
 def consultar_geradores():
     while True:
-        contrato = (input('Digite a conta contrato:'))
+        os.system('cls')
+        msg.top()
+        contrato = int(input('Digite a conta contrato:'))
         for dado in gerador:
             consulta = dado['contrato']
             if(consulta == contrato):  # consultar no vetor se existe o contrato cadastrado
@@ -119,6 +128,7 @@ def consultar_geradores():
                       'Token:', dado['token'], 'Consumido', dado['consumido'])
                 encontrou = "true"
                 print('='*40)
+                gf.grafico_horizontal(dado['contrato'])
 
         if not 'encontrou' in locals():  # verificar se retornou algum cliente para o usuário
             print('='*40)
@@ -130,51 +140,21 @@ def consultar_geradores():
 
 
 def relatorio_geradores():
+    os.system('cls')
+    msg.top()
+    print('\n\033[1mRELATÓRIO DE CLIENTES/GERADORES\033[m\n')
     for dado in gerador:
         print('Contrato: ', dado['contrato'], 'Nome: ', dado['nome'])
         print('Energ. Consumida:', dado['consumido'], 'Energ. Injetada: ',
-              dado['injetado'], 'Saldo Disponível: ', dado['saldo_energetico'], 'Crédito: E$', dado['credito'])
+              dado['injetado'], 'Saldo Disponível: ', dado['saldo_energetico'], 'Crédito: R$', dado['credito'])
         print('-'*80)
-    input('Pressione qualquer tecla para continuar...')
-
-
-# def grafico_geradores():
-#     os.system('cls')
-#     msg.top()
-#     print('\nRelatório de Clientes Geradores\n')
-#     for dado in gerador:
-#         print('Contrato: ', dado['contrato'], 'Nome: ',
-#               dado['nome'], ' Crédito:', dado['credito'])
-#         print(f'{"Energ. Consumida:":20} {dado["consumido"]:<5}', end=' ')
-#         cons = (dado["consumido"])//10
-#         print('\033[1;41m \033[m'*cons)
-#         print(f'{"Energ. Injetada:":20} {dado["injetado"]:<5}', end=' ')
-#         cons = (dado["injetado"])//10
-#         print('\033[1;42m \033[m'*cons)
-#         print('-'*100)
-#     input('Pressione qualquer tecla para continuar...')
-
-
-def grafico_cliente():
-    os.system('cls')
-    msg.top()
-    print('\nGráfico de Clientes Geradores\n')
-    for dado in gerador:
-        # if dado['contrato'] == 123:
-        print('Contrato: ', dado['contrato'], 'Nome: ',
-              dado['nome'], ' Crédito:', dado['credito'])
-        print(f'{"Energ. Consumida:":20} {dado["consumido"]:<5}', end=' ')
-        consC = (dado["consumido"])//100
-        consI = (dado["injetado"])//100
-        grafico.grafico_vertical(consI, consC)
-
     input('Pressione qualquer tecla para continuar...')
 
 
 def relatorio_parceiro():
     os.system('cls')
     msg.top()
-    print('Relatório de Parceiros Cadastrados')
+    print('\n\033[1mRelatório de Parceiros Cadastrados\033[m\n')
     for dado in parceiro:
         print('Contrato:', dado['contrato'], 'Nome:',
               dado['nome'], 'Crédito:', dado['credito'], 'Tipo de Parceiro:', dado['tipo'])
@@ -189,12 +169,3 @@ def relatorio_parceiro():
 
 
 # print(gerador)
-
-def editar_cotacao():
-    print("Valor atual da cotação ", cotacao[0])
-    print('='*40)
-    cotacaoValor = fun.editaCotacao()
-    cotacao[0] = cotacaoValor
-    print('='*40)
-    print("Ajuste realizado, novo valor de cotação ", cotacao[0])
-    input("Valor atualizado!Pressione qualquer tecla para continuar...")

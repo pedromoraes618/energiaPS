@@ -98,4 +98,5 @@ Escolha uma opção: »»»  ''')
         break
     else:
         print(f'({menu_principal}) - Opção inválida! ')
+
         menu_principal = valida_numero()

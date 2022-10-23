@@ -5,40 +5,38 @@ import funcao as func
 import registro_leituras as rl
 
 
-
 def login_concessionaria():
     while True:
         usuarioDigitado = input('Digite o seu Usuário: »»»  ')
         tokenDigitado = input('Digite o seu Token: »»»  ')
         for dado in cad.concecionaria:
-                    usuario = dado['user']
-                    token= dado['token']
-                    if(usuarioDigitado == usuarioDigitado): #consultar no vetor se existe o contrato cadastrado
-                        encontrouUser = "true"
-                        if(tokenDigitado==token):
-                            encontrou = usuario #usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
-                        else:
-                            print("Dados incorretos")
-                            # input('Pressione qualquer tecla para continuar...')
-                            os.system('cls')
-                            break
-                  
-                                
-            
+            usuario = dado['user']
+            token = dado['token']
+            # consultar no vetor se existe o contrato cadastrado
+            if(usuarioDigitado == usuarioDigitado):
+                encontrouUser = "true"
+                if(tokenDigitado == token):
+                    encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
+                else:
+                    print("Dados incorretos")
+                    # input('Pressione qualquer tecla para continuar...')
+                    os.system('cls')
+                    break
+
         if(not 'encontrouUser' in locals() and not 'encontrou' in locals()):
             print("Dados incorretos")
             input('Pressione qualquer tecla para continuar...')
             break
         elif(not 'encontrouUser' in locals()):
-                print("Usuário incorreto")
-                input('Pressione qualquer tecla para continuar...')
-                break
+            print("Usuário incorreto")
+            input('Pressione qualquer tecla para continuar...')
+            break
         elif(not 'encontrou' in locals()):
-                print("Token incorreto")
-                input('Pressione qualquer tecla para continuar...')
-                break
-                
-        if 'encontrou' in locals():  #verificar houve retorno para o usuário
+            print("Token incorreto")
+            input('Pressione qualquer tecla para continuar...')
+            break
+
+        if 'encontrou' in locals():  # verificar houve retorno para o usuário
             while True:
                 os.system('cls')
                 msg.top()
@@ -90,4 +88,3 @@ Escolha uma opção: »»»  ''')
                     os.system('cls')
                     break
             break
-

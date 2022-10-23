@@ -13,9 +13,10 @@ cabecalho()
 
 
 def registro():
+    x = 0
     print('REGISTRO DE DADOS ')
 
-    contrato = str(input('Digite a Conta Contrado: '))
+    contrato = int(input('Digite a Conta Contrado: '))
     for dado in cad.gerador:
         if dado['contrato'] == contrato:
             print('.'*40)
@@ -28,11 +29,18 @@ def registro():
             dado['consumido'] = consumido
             dado['injetado'] = injetado
             dado['saldo_energetico'] = injetado-consumido
-            dado['credito'] = dado['saldo_energetico'] * dado['conversor']
+            if injetado > consumido:
+                dado['credito'] = dado['saldo_energetico'] * \
+                    cad.gerador[1]['cotacao']
+            print('Contrato: ', dado['contrato'], 'Nome: ',
+                  dado['nome'], 'Crédito: E$', dado['credito'])
+            print('-'*80)
             break
+        else:
+            x = x+1
+            if x == len(cad.gerador):
+                print(f'Conta contrato: {contrato}, não localizada!')
     # if resultado == 'não localizado':
     #     print(f'Conta contrato {contrato} não localizada!')
-    print('Contrato: ', dado['contrato'], 'Nome: ',
-          dado['nome'], 'Crédito: E$', dado['credito'])
-    print('-'*80)
+
     input('Pressione qualquer tecla para continuar...')

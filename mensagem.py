@@ -55,7 +55,7 @@ para compra de produtos ou serviços, gerando assim economia e circulação de b
 
 
 def top():
-    nome = 'SYSTEMA: ENERGIA POSITIVA'
+    nome = '\033[1mSYSTEMA: ENERGIA POSITIVA\033[m'
     print('~='*50)
     print(f'{nome:^100}')
     print('~='*50)

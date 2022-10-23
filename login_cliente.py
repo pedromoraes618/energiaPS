@@ -1,13 +1,15 @@
 import os
 import cadastros as cad
 import mensagem as msg
+import grafico as gr
 import funcao as func
+import mercado
 import registro_leituras as rl
 
 
 def login_cliente():
     while True:
-        contratoDigitao = input('Digite o Número contrato: »»»  ')
+        contratoDigitao = int(input('Digite o Número contrato: »»»  '))
         tokenDigitado = input('Digite o seu Token: »»»  ')
         for dado in cad.gerador:
             contrato = dado['contrato']
@@ -15,6 +17,8 @@ def login_cliente():
             token = dado['token']
             if (contratoDigitao == contrato):  # consultar no vetor se existe o contrato cadastrado
                 encontrouContrato = "true"
+                user = dado['nome']
+                cod_user = dado['contrato']
                 if (tokenDigitado == token):
                     encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
                 else:
@@ -37,6 +41,7 @@ def login_cliente():
             while True:
                 os.system('cls')
                 msg.top()
+                print(f'\n{user}, Seja Bem Vindo!')
                 menu_cliente = input('''
 [#] Area - Clientes/Geradores:
 --------------------------------------------------
@@ -48,12 +53,14 @@ def login_cliente():
 Escolha uma opção: »»»  ''')
 
                 if menu_cliente == '1':
-                    cad.grafico_cliente()
+                    gr.grafico_cliente(cod_user)
                 elif menu_cliente == '2':
                     # Transações com parceiros
-                    input('EM CONSTRUÇÃO. Tecle para sair >')
+                    mercado.transferencias(cod_user)
+                    #input('EM CONSTRUÇÃO. Tecle para sair >')
                 elif menu_cliente == '3':
                     # Relatorios de transações
+                    mercado.impressao_extrato(cod_user)
                     input('EM CONSTRUÇÃO. Tecle para sair >')
                 elif menu_cliente == '4':
                     os.system('cls')
