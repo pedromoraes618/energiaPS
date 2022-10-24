@@ -13,9 +13,9 @@ def login_concessionaria():
             usuario = dado['user']
             token = dado['token']
             # consultar no vetor se existe o contrato cadastrado
-            if (usuarioDigitado == usuarioDigitado):
+            if(usuarioDigitado == usuario):
                 encontrouUser = "true"
-                if (tokenDigitado == token):
+                if(tokenDigitado == token):
                     encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
                 else:
                     print("Dados incorretos")
@@ -23,15 +23,15 @@ def login_concessionaria():
                     os.system('cls')
                     break
 
-        if (not 'encontrouUser' in locals() and not 'encontrou' in locals()):
+        if(not 'encontrouUser' in locals() and not 'encontrou' in locals()):
             print("Dados incorretos")
             input('Pressione qualquer tecla para continuar...')
             break
-        elif (not 'encontrouUser' in locals()):
+        elif(not 'encontrouUser' in locals()):
             print("Usuário incorreto")
             input('Pressione qualquer tecla para continuar...')
             break
-        elif (not 'encontrou' in locals()):
+        elif(not 'encontrou' in locals()):
             print("Token incorreto")
             input('Pressione qualquer tecla para continuar...')
             break

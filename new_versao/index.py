@@ -1,7 +1,5 @@
 import os
-import cadastros as cad
 import mensagem as msg
-import registro_leituras as rl
 import login_cliente as lgc
 import login_concessionaria as lcs
 import login_parceiro as lprc
@@ -16,16 +14,6 @@ def valida_numero():
         else:
             print('Erro, Insira um valor númérico!')
     return pesquisar
-
-# def valida_numero(pesq):
-#     while True:
-#         pesq = input('Escolha uma opção: »»»  ')
-#         if pesq.isnumeric():
-#             pesquisar = (int(pesq))
-#             break
-#         else:
-#             print('Erro, Insira um valor númérico!')
-#     return pesquisar
 
 
 while True:
@@ -104,8 +92,10 @@ Escolha uma opção: »»»  ''')
         msg.sobre()
     elif menu_principal == 5:
         os.system('cls')
+
         print('saindo...')
         break
     else:
         print(f'({menu_principal}) - Opção inválida! ')
-        menu_principal = valida_numero()
+
+        #menu_principal = valida_numero()
