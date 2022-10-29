@@ -3,17 +3,19 @@ import cadastros as cad
 import mensagem as msg
 import funcao as func
 import registro_leituras as rl
+from getpass import getpass
 
 
 def login_concessionaria():
     while True:
-        usuarioDigitado = input('Digite o seu Usuário: »»»  ')
-        tokenDigitado = input('Digite o seu Token: »»»  ')
+        usuarioDigitado = str(input('Digite o seu Usuário: »»»  '))
+        tokenDigitado = getpass(
+            prompt='Digite o seu Token: »»»  ')
         for dado in cad.concecionaria:
             usuario = dado['user']
             token = dado['token']
             # consultar no vetor se existe o contrato cadastrado
-            if(usuarioDigitado == usuarioDigitado):
+            if(usuarioDigitado == usuario):
                 encontrouUser = "true"
                 if(tokenDigitado == token):
                     encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
@@ -40,8 +42,7 @@ def login_concessionaria():
             while True:
                 os.system('cls')
                 msg.top()
-                menu_concessionaria = input('''
-[#] Area - Concessionária:
+                menu_concessionaria = input('''\n\033[1m[~+] Area - Concessionária:\033[m
 --------------------------------------------------
 [1] Cadastro Clientes/Geradores
 [2] Cadastro Parceiros
@@ -49,11 +50,11 @@ def login_concessionaria():
 [4] Relatórios
 [5] Consultar Clientes/Geradores
 [6] Alterar cotação $
-[7] Voltar
+[7] Sair
 
 Escolha uma opção: »»»  ''')
                 if menu_concessionaria == '1':
-                    cad.cadastro_geradores()
+                    cad.cadastro_clientes()
                 elif menu_concessionaria == '2':
                     os.system('cls')
                     msg.top()
@@ -64,22 +65,21 @@ Escolha uma opção: »»»  ''')
                     while True:
                         os.system('cls')
                         msg.top()
-                        menu_relatorio_concessionaria = input('''
-Menu Concessionária Relatórios:
+                        menu_relatorio_concessionaria = input('''\n\033[1m[~+] Menu Concessionária Relatórios:\033[m
 --------------------------------------------------
 [1] Relatório de Clientes
 [2] Relatório de Parceiros
-[3] Voltar
+[3] Sair
 Escolha uma opção: »»»  ''')
                         if menu_relatorio_concessionaria == '1':
-                            cad.relatorio_geradores()
+                            cad.relatorio_clientes()
                         if menu_relatorio_concessionaria == '2':
                             cad.relatorio_parceiro()
                         if menu_relatorio_concessionaria == '3':
                             os.system('cls')
                             break
                 elif menu_concessionaria == '5':
-                    cad.consultar_geradores()
+                    cad.consultar_clientes()
 
                 elif menu_concessionaria == '6':
                     cad.editar_cotacao()

@@ -1,46 +1,38 @@
 import cadastros as cad
-
-
-def cabecalho():
-    concessionaria = ' <<<<  CONCESSIONÁRIA - MARANHÃO  >>>> '
-    separador = '='*len(concessionaria)
-    topo = separador + '\n' + concessionaria + '\n' + separador
-    print(topo)
-    # data_extenso()
-
-
-cabecalho()
+import funcao as fun
+import mensagem as msg
+import os
+import mercado
 
 
 def registro():
-    x = 0
-    print('REGISTRO DE DADOS ')
+    os.system('cls')
+    msg.top()
+    print('\n\033[1m[~+] Area - Concessionária:\033[m\n')
+    print('LEITURA DE DADOS DE CONSUMO E GERAÇÃO')
+    contrato = fun.validaNumeroContrato()
+    dado = fun.busca_cliente(contrato)
+    if dado != -1:
+        # for dado in cad.clientes:
+        print('.'*40)
+        print(dado)
+        print('.'*40)
+        consumido = fun.valida_consumo()  # validar consumo
 
-    contrato = int(input('Digite a Conta Contrado: '))
-    for dado in cad.gerador:
-        if dado['contrato'] == contrato:
-            print('.'*40)
-            print(dado)
-            print('.'*40)
-            consumido = int(input('Leitura de consumo(kw):'))
-            consumido += dado['consumido']
-            injetado = int(input('Leitura de valor injetado(kw):'))
-            injetado += dado['injetado']
-            dado['consumido'] = consumido
-            dado['injetado'] = injetado
-            dado['saldo_energetico'] = injetado-consumido
-            if injetado > consumido:
-                dado['credito'] = dado['saldo_energetico'] * \
-                    cad.gerador[1]['cotacao']
-            print('Contrato: ', dado['contrato'], 'Nome: ',
-                  dado['nome'], 'Crédito: E$', dado['credito'])
-            print('-'*80)
-            break
-        else:
-            x = x+1
-            if x == len(cad.gerador):
-                print(f'Conta contrato: {contrato}, não localizada!')
-    # if resultado == 'não localizado':
-    #     print(f'Conta contrato {contrato} não localizada!')
+        injetado = fun.valida_valor_injetado()
+        # mercado.ganhando_credito(1,contrato,con)
+        dado['consumido'].append(consumido)
+        dado['injetado'].append(injetado)
+        dado['saldo_energetico'] = injetado-consumido
+        if injetado > consumido:
+            credito = (injetado-consumido) * \
+                cad.vCotacao[len(cad.vCotacao)-1]
+            mercado.ganhando_credito(0, dado['contrato'], credito)
+        print(
+            f'Contrato: {dado["contrato"]} Nome: {dado["nome"]} Saldo: {dado["saldo_energetico"]} Crédito: R$ {dado["credito"]:.2f}')
+        print('-'*80)
 
-    input('Pressione qualquer tecla para continuar...')
+    else:
+        print(f'Conta contrato: {contrato} não localizada!')
+
+    input('Pressione  tecla ENTER para continuar...')

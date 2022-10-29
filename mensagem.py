@@ -1,5 +1,5 @@
 import os
-from datetime import date, time
+from datetime import date
 meses = ["", "Janeiro", "Fevereiro", "Março", "Abril", "Maio",
              "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
@@ -11,7 +11,16 @@ def data_extenso():
     mes = hoje.month
     ano = hoje.year
     mes = meses[mes]
-    print(f'São Luís, {dia} de  {mes} de {ano}.')
+    print(f'{"São Luís":>70}, {dia} de  {mes} de {ano}.')
+
+
+def top():
+    nome = ('SYSTEMA: ENERGIA POSITIVA')
+    separador = ('\033[1;7m~=\033[m'*50)
+    print(f'{separador}\n{nome[0:100]:^100}\n{separador}')
+    data_extenso()
+    print('~='*50)
+    print()
 
 
 def sobre():
@@ -54,18 +63,9 @@ para compra de produtos ou serviços, gerando assim economia e circulação de b
     input('Pressione qualquer tecla para continuar...')
 
 
-def top():
-    nome = '\033[1mSYSTEMA: ENERGIA POSITIVA\033[m'
-    print('~='*50)
-    print(f'{nome:^100}')
-    print('~='*50)
-    data_extenso()
-
-
 # def apresentacao():
 #     print('''
 #         Esse aprojeto visa apresentar uma proposta de incentivo ao uso da energia solar, oferencendo crédito para os consumidores com geração excedente
 #     esse credito poderá ser utilizado como moeda de troca, mercadoriasou serviços, e como doação à instiuições de caridade cadastradas.
-#     Com isso, o sistema energetico do Brasil ganha com mais geração diminuindo assim o uso de termo eletricas.        
+#     Com isso, o sistema energetico do Brasil ganha com mais geração diminuindo assim o uso de termo eletricas.
 #     ''')
-
