@@ -1,20 +1,29 @@
 import os
 import cadastros as cad
 import mensagem as msg
+import grafico as gr
 import funcao as func
+import mercado
 import registro_leituras as rl
+from getpass import getpass
 
 
 def login_cliente():
     while True:
-        contratoDigitao = input('Digite o Número contrato: »»»  ')
-        tokenDigitado = input('Digite o seu Token: »»»  ')
-        for dado in cad.gerador:
-            contrato = dado['contrato']
-            usuario = dado['nome']
-            token = dado['token']
-            if (contratoDigitao == contrato):  # consultar no vetor se existe o contrato cadastrado
+        # int(input('Digite o Número contrato: »»»  '))
+        contratoDigitao = func.validaNumeroContrato()
+        tokenDigitado = getpass(
+            prompt='Digite o seu Token: »»»  ')
+        print()
+        for dado in cad.clientes:
+            # consultar no vetor se existe o contrato cadastrado
+            if (contratoDigitao == dado['contrato']):
+                #contrato = dado['contrato']
+                usuario = dado['nome']
+                token = dado['token']
                 encontrouContrato = "true"
+                user = dado['nome']
+                cod_user = dado['contrato']
                 if (tokenDigitado == token):
                     encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
                 else:
@@ -37,24 +46,26 @@ def login_cliente():
             while True:
                 os.system('cls')
                 msg.top()
-                menu_cliente = input('''
-[#] Area - Clientes/Geradores:
+                print(f'\n{user}, Seja Bem Vindo!')
+                menu_cliente = input('''\n\033[1m[#] Area - Clientes/Geradores:\n\033[m
 --------------------------------------------------
 [1] Consulta de Créditos
 [2] Uso de Créditos / Transações
 [3] Relatórios
-[4] Voltar
+[4] Sair
 
 Escolha uma opção: »»»  ''')
 
                 if menu_cliente == '1':
-                    cad.grafico_cliente()
+                    gr.grafico_cliente(cod_user)
                 elif menu_cliente == '2':
                     # Transações com parceiros
-                    input('EM CONSTRUÇÃO. Tecle para sair >')
+                    mercado.transferencias(cod_user, 'debito')
+                    #input('EM CONSTRUÇÃO. Tecle para sair >')
                 elif menu_cliente == '3':
                     # Relatorios de transações
-                    input('EM CONSTRUÇÃO. Tecle para sair >')
+                    mercado.relatorio_transacoes(cod_user, 'cliente')
+                    input('Pressione qualquer tecla para continuar...')
                 elif menu_cliente == '4':
                     os.system('cls')
                     break

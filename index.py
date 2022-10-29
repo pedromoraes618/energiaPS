@@ -1,38 +1,7 @@
-import os
-import cadastros as cad
-import mensagem as msg
-import registro_leituras as rl
-import login_cliente as lgc
-import login_concessionaria as lcs
-import login_parceiro as lprc
-
-
-def valida_numero():
-    while True:
-        pesq = input('Escolha uma opção: »»»  ')
-        if pesq.isnumeric():
-            pesquisar = (int(pesq))
-            break
-        else:
-            print('Erro, Insira um valor númérico!')
-    return pesquisar
-
-# def valida_numero(pesq):
-#     while True:
-#         pesq = input('Escolha uma opção: »»»  ')
-#         if pesq.isnumeric():
-#             pesquisar = (int(pesq))
-#             break
-#         else:
-#             print('Erro, Insira um valor númérico!')
-#     return pesquisar
-
-
 while True:
     os.system('cls')
     msg.top()
-    print('''
-Menu Principal:
+    print('''\n\033[1m[~+] Menu Principal:\033[m
 --------------------------------------------------
 [1] Login - Concessionária
 [2] Login - Cliente/Gerador
@@ -41,20 +10,16 @@ Menu Principal:
 [5] Sair
     ''')
     print('='*40)
-    menu_principal = valida_numero()
-
-    # menu_principal = int(input('Escolha uma opção: »»»  '))
-    # valida_numero(menu_principal)
+    menu_principal = func.valida_menu()
 
     if menu_principal == 1:
         while True:
             os.system('cls')
             msg.top()
-            menu_concecionaria = input('''
-[#] Area - Login/Concessionária:
+            menu_concecionaria = input('''\n\033[1m[~+] Area - Login - Concessionária:\033[m
 ------------------------
 [1] Login
-[2] Voltar
+[2] Sair
 Escolha uma opção: »»»  ''')
             if menu_concecionaria == '1':
                 lcs.login_concessionaria()
@@ -68,11 +33,10 @@ Escolha uma opção: »»»  ''')
             os.system('cls')
             msg.top()
 
-            menu_parceiro = input('''
-[#] Area - Login/Cliente:
+            menu_parceiro = input('''\n\033[1m[~+] Area - Login - Cliente:\033[m
 ------------------------
 [1] Login
-[2] Voltar
+[2] Sair
 Escolha uma opção: »»»  ''')
             if menu_parceiro == '1':
                 lgc.login_cliente()
@@ -86,11 +50,10 @@ Escolha uma opção: »»»  ''')
             os.system('cls')
             msg.top()
 
-            menu_parceiro = input('''
-[#] Area - Login/Parceiro:
+            menu_parceiro = input('''\n\033[1m[~+] Area - Login - Parceiro:\033[m
 ------------------------
 [1] Login
-[2] Voltar
+[2] Sair
 Escolha uma opção: »»»  ''')
             if menu_parceiro == '1':
                 lprc.login_parceiro()
@@ -100,12 +63,13 @@ Escolha uma opção: »»»  ''')
                 break
 
     elif menu_principal == 4:
-        print('Informação sobre o projeto - em contrução')
         msg.sobre()
     elif menu_principal == 5:
         os.system('cls')
-        print('saindo...')
+        print('Volte Sempre!...')
+        sleep(1)
+        os.system('cls')
         break
     else:
-        print(f'({menu_principal}) - Opção inválida! ')
-        menu_principal = valida_numero()
+        print('Opção inválida. Tente novamente!')
+        sleep(1)

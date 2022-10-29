@@ -3,18 +3,25 @@ import cadastros as cad
 import mensagem as msg
 import funcao as func
 import registro_leituras as rl
+import mercado
+from getpass import getpass
 
 
 def login_parceiro():
     while True:
-        usuarioDigitado = input('Digite o seu Usuário: »»»  ')
-        tokenDigitado = input('Digite o seu Token: »»»  ')
+
+        # int(input('Digite o seu Usuário: »»»  '))
+        usuarioDigitado = func.validaNumeroContrato()
+        tokenDigitado = getpass(
+            prompt='Digite o seu Token: »»»  ')
         for dado in cad.parceiro:
-            usuario = dado['user']
-            token = dado['token']
             # consultar no vetor se existe o contrato cadastrado
-            if (usuarioDigitado == usuarioDigitado):
+            if (usuarioDigitado == dado['contrato']):
+                usuario = dado['nome']
+                token = dado['token']
                 encontrouUser = "true"
+                user = dado['nome']
+                cod_user = dado['contrato']
                 if (tokenDigitado == token):
                     encontrou = usuario  # usuario logado senha e contrato ok! criei uma variavel para guardar o nome do ususario caso logado com sucesso
                 else:
@@ -38,18 +45,18 @@ def login_parceiro():
                 os.system('cls')
                 msg.top()
                 menu_parceiro = input('''
-[#] Area - Parceiros comercio/instituições de caridade:
+[~+] Area - Parceiros comercio/instituições de caridade:
 --------------------------------------------------
 [1] Relatórios de transações
-[2] Uso de créditos
+[2] Uso de créditos 
 [3] Voltar
 Escolha uma opção: »»»  ''')
                 if menu_parceiro == '1':
-                    input('EM CONSTRUÇÃO. Tecle para sair >')
+                    mercado.relatorio_transacoes(cod_user, 'parceiro')
+                    input('Tecle ENTER para sair >')
                 elif menu_parceiro == '2':
-                    input('EM CONSTRUÇÃO. Tecle para sair >')
+                    input('Tecle ENTER para sair >')
                 elif menu_parceiro == '3':
                     os.system('cls')
                     break
-
         break
