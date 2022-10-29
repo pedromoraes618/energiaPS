@@ -43,11 +43,11 @@ def editar_cotacao():
         # break
 
 
-vCotacao = [0.9, 1]  # editar_cotacao()
+vCotacao = [0.9]  # editar_cotacao()
 
 clientes = [{'contrato': 100, 'nome': 'CRISTIANO RONALDO', 'consumido': [700, 600, 700, 750], 'injetado': [900, 850, 800, 820], 'saldo_energetico': [200, 250, 100, 70], 'credito': 558, 'token': '0'},
             {'contrato': 101, 'nome': 'MESSI', 'consumido': [0], 'injetado': [0],
-             'saldo_energetico': [50, 10, 60, 45],  'credito': 165, 'token': '0'},
+             'saldo_energetico': [0],  'credito': 165, 'token': '0'},
             {'contrato': 102, 'nome': 'RONALDINHO GAUCHO', 'consumido': [600, 500, 400, 450],  'injetado': [900, 850, 800, 820], 'saldo_energetico': [300, 350, 400, 370], 'credito': 1278, 'token': '0'}]
 
 
